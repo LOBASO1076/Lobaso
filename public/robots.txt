@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /
+
+# Preview/staging is intentionally not indexable. Before production,
+# replace this file in the approved production build with an allowlist and sitemap.
