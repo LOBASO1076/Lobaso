@@ -1,0 +1,64 @@
+# Seafoods Premium OS — Environment Example
+# Nunca commit valores reais. O runtime gerenciado fornece os valores de produção.
+
+# Banco e sessão
+DATABASE_URL=
+JWT_SECRET=
+
+# Manus OAuth
+VITE_APP_ID=
+OAUTH_SERVER_URL=https://api.manus.im
+VITE_OAUTH_PORTAL_URL=
+OWNER_OPEN_ID=
+OWNER_NAME=
+
+# Built-in APIs server-side
+BUILT_IN_FORGE_API_URL=
+BUILT_IN_FORGE_API_KEY=
+# AI_GATEWAY_API_KEY não é consumida neste release; não adicione em VITE_*.
+
+# Built-in APIs frontend, somente quando estritamente necessário
+VITE_FRONTEND_FORGE_API_URL=
+VITE_FRONTEND_FORGE_API_KEY=
+
+# Analytics opcional do template
+VITE_ANALYTICS_ENDPOINT=
+VITE_ANALYTICS_WEBSITE_ID=
+
+# Canal e persistência — staging sem publicação/DNS; catálogo RED continua bloqueado por guard server-side
+APP_RELEASE_CHANNEL=staging
+APP_ALLOW_PERSISTENCE=true
+APP_ALLOW_CABRAL_REPRESENTATION=true
+APP_TENANT_SLUG=seafoods-premium-staging
+APP_CANONICAL_ORIGIN=https://<preview-host>
+APP_ALLOWED_ORIGINS=https://<preview-host>
+# Produção somente após catálogo, providers e aceite operacional. A persistência técnica do staging não é aprovação comercial.
+# APP_TENANT_SLUG=seafoods-premium
+# APP_RELEASE_CHANNEL=production
+# APP_ALLOW_PERSISTENCE=true
+# APP_ALLOW_CABRAL_REPRESENTATION=true # somente após contrato, catálogo e aprovação operacional
+# APP_CANONICAL_ORIGIN=https://pedidos.sfppedidos.app
+# APP_ALLOWED_ORIGINS=https://pedidos.sfppedidos.app,https://www.sfppedidos.app
+VITE_RELEASE_CHANNEL=staging
+VITE_PUBLIC_ORIGIN=https://<preview-host>
+# Produção aprovada: VITE_RELEASE_CHANNEL=production e VITE_PUBLIC_ORIGIN=https://sfppedidos.app
+
+# Integrações/provider adapters — manter server-side e vazios até aprovação
+# OUTBOX_PROVIDER=
+# OUTBOX_SIGNING_SECRET=
+# STORAGE_BUCKET=
+
+# WhatsApp Business Cloud API — endpoint implementado, DESLIGADO por padrão
+# Mantenha WHATSAPP_ENABLED=false até o callback HTTPS de staging ser verificado na Meta.
+WHATSAPP_ENABLED=false
+# WHATSAPP_PHONE_NUMBER_ID=
+# WHATSAPP_BUSINESS_ACCOUNT_ID=
+# WHATSAPP_ACCESS_TOKEN=
+# WHATSAPP_APP_SECRET=
+# WHATSAPP_VERIFY_TOKEN=
+# Callback: https://<host-aprovado>/api/webhooks/whatsapp
+# WHATSAPP_WEBHOOK_URL=
+
+# Pagamentos — NÃO IMPLEMENTADO neste checkpoint
+# STRIPE_SECRET_KEY=
+# STRIPE_WEBHOOK_SECRET=
