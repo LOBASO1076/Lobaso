@@ -1,0 +1,81 @@
+{
+  "product": "Sea System ERP / SFP-OS",
+  "release": {
+    "checkpoint": "release candidate — persistência técnica de staging e artefatos 151 gerados",
+    "status": "staging validado; produção pública bloqueada por DNS, deployment alvo, catálogo aprovado e providers",
+    "environment": "WebDev staging com banco MySQL/TiDB gerenciado; tenant staging configurado, persistência técnica ativa e guard de catálogo RED",
+    "previewUrl": "https://3000-i21n3xf2jstkcds5xhtxf-127d4e2f.us1.manus.computer",
+    "officialDomainPrepared": "https://sfppedidos.app/",
+    "verifiedAt": "2026-09-17"
+  },
+  "executed": [
+    "Storefront Vercel em uso preservado; nenhuma alteração, DNS, Registro.br, domínio customizado ou publicação realizada.",
+    "Commerce Core ERP-first criado para cliente, pedido, itens, pagamento, entrega, eventos, outbox, auditoria, idempotência e funil.",
+    "Checkout /checkout criado com preço autoritativo no servidor, subtotal, frete a confirmar, dados progressivos e confirmação humana.",
+    "Tenants, memberships, escopo server-side e índices aplicados ao Commerce Core; SKU e idempotência são únicos por tenant.",
+    "RBAC por papel de tenant aplicado: viewer lê; owner/admin/operator executam pagamento, entrega e estoque.",
+    "Rate limit durável, CSP, headers, CORS allowlist, canonical, Open Graph, robots, sitemap e configuração de domínio preparados.",
+    "Outbox implementada com fronteira plugável, claim concorrente, HMAC, HTTPS, idempotency key, timeout, retry exponencial, falha terminal, auditoria e vínculo de taskUid a tenant.",
+    "Callback POST /api/scheduled/outbox bloqueia chamador anônimo e exige cron identity + job registrado por taskUid.",
+    "Runbook de backup, checksum, restore isolado e rollback produzido para ativação posterior sem VPS.",
+    "Staging preparado com canal explícito, noindex/no-store, sitemap vazio, CORS restrito e persistência comercial opt-in.",
+    "Endpoint Meta WhatsApp preparado com GET de verify token, POST raw-body/HMAC, conferência de phone number, deduplicação tenant/messageId, inbox e notificações internas.",
+    "Analytics de vendas diário implementado com filtros de período, canal, status e valor mínimo; série e mix são agregados server-side por tenant.",
+    "Vendas do dashboard são derivadas uma única vez de pedido com pagamento confirmado e vinculadas a orderId; mensagens WhatsApp não viram receita por inferência.",
+    "Referência comercial V3 versionada em shared/commercialReference.ts; preços, Boil e metas permanecem não reconciliados e não publicados.",
+    "Control Tower de crescimento exibe metas B2C/B2B, premissas e funil reverso como referência de execução, não como realizado."
+    ,"Política B2B de Representações implementada com +18%, desconto máximo 5%, pacote 5–6 kg, CNPJ obrigatório, comissão 2–5% e termos auditáveis por pedido."
+    ,"Valor representado é separado de receita Seafoods; margem adicional é reconhecida e comissão fica pendente até recebimento auditado."
+    ,"Simulação Cabral ativada no staging com APP_ALLOW_CABRAL_REPRESENTATION=true e APP_ALLOW_PERSISTENCE=true; catálogo TESTE/RED continua protegido pelo guard server-side e widget usa fixture rotulada sem gravar receita comercial."
+    ,"Intake documental de 121 linhas foi registrado na quarentena unassigned/RED; com 17 B2C e 13 B2B, o backlog soma 151 itens bloqueados."
+    ,"Tenant seafoods-premium-staging criado com membership owner para o administrador atual; persistência técnica foi ativada no staging, mas catálogo TESTE/RED permanece não vendável.",
+    "Manifesto e CSV de 151 referências gerados; CABRAL-IMP-123 a CABRAL-IMP-151 identificam 29 registros existentes sem adicionar itens ou inventar preços.",
+    "Trinta referências B2C/B2B foram inseridas em backlog tenant-scoped de reconciliação, todas bloqueadas sem SKU, custo, estoque, foto ou claim operacional.",
+    "Playbook B2B Seafoods Brazil criado com Meta, Google Search, outbound e gate de CAC versus margem de contribuição."
+    ,"Auditoria de go-live confirmou build/testes locais; sfppedidos.app foi definido como domínio planejado do aplicativo, mas o projeto Vercel alvo, records DNS oficiais, TLS e catálogo ainda não foram verificados."
+  ],
+  "databaseVerified": {
+    "connected": true,
+    "tables": ["users", "products", "inventoryMovements", "sales", "saleItems", "auditLogs", "customers", "orders", "orderItems", "payments", "deliveries", "domainEvents", "outboxEvents", "auditEvents", "idempotencyKeys", "funnelEvents", "tenants", "tenantMemberships", "rateLimitEvents", "scheduledJobs", "whatsappMessages", "dashboardNotifications", "catalogReconciliationItems", "b2bCabralTerms"],
+    "catalog": "Apenas TESTE-01 a TESTE-09 em products; a fila privada contém 151 referências RED bloqueadas e não é catálogo comercial validado.",
+    "migrationsApplied": ["0002 Commerce Core", "0003 tenants e memberships", "0004 rateLimitEvents", "0005 tenantId e índices", "0006 SKU único por tenant", "0007 scheduledJobs, retry e lastError de outbox", "0008 whatsappMessages e dashboardNotifications", "0009 sales.orderId e unicidade tenant/pedido", "0010 catalogReconciliationItems e índices", "0011 b2bCabralTerms", "0012 intake e semáforo de reconciliação"],
+    "verifiedColumns": ["scheduledJobs.taskUid", "scheduledJobs.tenantId", "outboxEvents.status com processing", "outboxEvents.lastError", "outboxEvents.tenantId", "whatsappMessages.messageId", "dashboardNotifications.kind", "sales.orderId", "catalogReconciliationItems.status", "catalogReconciliationItems.trafficLight", "b2bCabralTerms.representedValueCents"]
+  },
+  "implemented": [
+    "Dashboard e checkout rotulam explicitamente o modo demo; ações legadas sem persistência segura ficam desabilitadas.",
+    "Autenticação Manus OAuth e procedures protegidas para pedido, Control Tower, pagamento, entrega e estoque.",
+    "Tenant público configurado por APP_TENANT_SLUG e acesso privado por tenantMemberships; frontend não escolhe tenant.",
+    "Outbox provider-neutral por webhook HMAC, sem segredo no cliente; eventos só viram published após entrega bem-sucedida.",
+    "Job serverless preparado para plataforma gerenciada; sem timer em memória, VPS, PM2 ou worker persistente.",
+    "WhatsApp Inbox e notificações comerciais em painel; endpoint e segredos permanecem desabilitados no staging atual.",
+    "Gráficos Recharts interativos e filtros avançados usam agregações server-side sem preencher o estado vazio com fixtures.",
+    "Control Tower V3 calcula 600 pedidos/mês, 20/dia e 12.000 interações qualificadas/mês somente como engenharia reversa de premissas fornecidas."
+  ],
+  "simulated": [
+    "Dashboard e checkout ficam em demo enquanto não há tenant + catálogo comercial autorizado.",
+    "Produtos TESTE-01 a TESTE-09 são fixtures e não geram pedido persistente.",
+    "WhatsApp Simulator continua UX; o endpoint Business está implementado, porém sem app Meta, credencial, webhook inscrito, envio, consentimento ou mensagem real.",
+    "Outbox não é acionada enquanto OUTBOX_PROVIDER, OUTBOX_WEBHOOK_URL, OUTBOX_SIGNING_SECRET e job registrado não forem aprovados/configurados.",
+    "Subdomínios pedidos, prontos, natura, boil e b2b são somente planejamento.",
+    "Campanhas Meta e Google não foram criadas ou publicadas; conectores permanecem desativados e claims de certificação, SLA e desconto não são aprovados."
+  ],
+  "externalPrerequisites": [
+    "Informar e autorizar catálogo comercial real com SKU, unidade, preço, custo, estoque, disponibilidade, fornecedor, lote e foto correspondente.",
+    "Aprovar margem de contribuição por pedido e CAC máximo antes de autorizar qualquer orçamento B2B.",
+    "Criar tenant operacional e membership do administrador no ambiente alvo, configurando APP_TENANT_SLUG somente depois da validação de staging.",
+    "Escolher e aprovar providers de pagamento, WhatsApp Business, logística, CRM e observabilidade, com segredos exclusivamente server-side.",
+    "Conectar o projeto Vercel alvo e obter no painel os records oficiais por domínio antes de alterar Registro.br; validar TLS/CORS/OAuth/callback/headers no domínio e só então autorizar DNS.",
+    "Executar backup real para destino autorizado, checksum, restore isolado e rollback check antes de dados comerciais."
+  ],
+  "validation": {
+    "typescript": "passed",
+    "tests": "24 arquivos / 55 testes aprovados, incluindo contenção n8n/Z-API, bootstrap fail-closed, ledger sanitizado, HMAC Meta, anti-replay temporal, política 401/403, manifesto 151, simulação Cabral, métricas segregadas, CNPJ/pacote B2B, filtro B2B/RED, entrypoint serverless Vercel, correção do runtime inválido, runbook de rotação, entregáveis do briefing e configuração de sfppedidos.app",
+    "productionBuild": "passed; aviso não bloqueante de chunk JS acima de 500 kB",
+    "http": "CSP, headers, robots, sitemap, CORS permitido/negado, rotas n8n/Z-API tombstonadas com 410, outbox sem autenticação com 401 e endpoint WhatsApp deferred com 503 verificados",
+    "visual": "dashboard e checkout verificados em preview; dashboard com filtros, analytics, WhatsApp e Control Tower V3 revisado em desktop e mobile",
+    "stagingPreparation": "APP_TENANT_SLUG=seafoods-premium-staging, APP_RELEASE_CHANNEL=staging, APP_ALLOW_PERSISTENCE=true, APP_ALLOW_CABRAL_REPRESENTATION=true; persistência técnica e simulação Cabral ativas com guard de catálogo TESTE/RED, metadata, X-Robots-Tag, no-store, robots e sitemap seguros; sem publicação/DNS",
+    "stagingRunbook": "docs/STAGING_RUNBOOK.md"
+  },
+  "notVerified": ["rotação efetiva de secrets comprometidos da VPS/n8n/Z-API/Meta/banco", "revogação de sessões e tokens na infraestrutura antiga", "pedido real ponta a ponta com catálogo autorizado", "baixa transacional de estoque", "pagamento e entrega reais", "handshake e POST reais do WhatsApp Business", "CRM externo", "backup restaurado", "rollback de release", "DNS/TLS de sfppedidos.app", "projeto Vercel e teamId verificados", "job gerenciado efetivamente agendado", "teste A/B de isolamento contra dados comerciais"],
+  "principle": "Sem VPS. O banco é fonte da verdade. IA, MCP, WhatsApp, marketing e providers externos são camadas auxiliares e não podem ser autoridade de preço, estoque, pedido, pagamento, frete, margem ou status."
+}

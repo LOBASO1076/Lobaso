@@ -1,0 +1,29 @@
+ALTER TABLE `idempotencyKeys` DROP INDEX `idempotency_keys_key_unique`;--> statement-breakpoint
+ALTER TABLE `auditEvents` ADD `tenantId` int;--> statement-breakpoint
+ALTER TABLE `customers` ADD `tenantId` int;--> statement-breakpoint
+ALTER TABLE `deliveries` ADD `tenantId` int;--> statement-breakpoint
+ALTER TABLE `domainEvents` ADD `tenantId` int;--> statement-breakpoint
+ALTER TABLE `funnelEvents` ADD `tenantId` int;--> statement-breakpoint
+ALTER TABLE `idempotencyKeys` ADD `tenantId` int;--> statement-breakpoint
+ALTER TABLE `inventoryMovements` ADD `tenantId` int;--> statement-breakpoint
+ALTER TABLE `orderItems` ADD `tenantId` int;--> statement-breakpoint
+ALTER TABLE `orders` ADD `tenantId` int;--> statement-breakpoint
+ALTER TABLE `outboxEvents` ADD `tenantId` int;--> statement-breakpoint
+ALTER TABLE `payments` ADD `tenantId` int;--> statement-breakpoint
+ALTER TABLE `products` ADD `tenantId` int;--> statement-breakpoint
+ALTER TABLE `sales` ADD `tenantId` int;--> statement-breakpoint
+ALTER TABLE `idempotencyKeys` ADD CONSTRAINT `idempotency_keys_tenant_scope_key_unique` UNIQUE(`tenantId`,`scope`,`key`);--> statement-breakpoint
+CREATE INDEX `audit_events_tenant_created_at_idx` ON `auditEvents` (`tenantId`,`createdAt`);--> statement-breakpoint
+CREATE INDEX `customers_tenant_whatsapp_idx` ON `customers` (`tenantId`,`whatsapp`);--> statement-breakpoint
+CREATE INDEX `customers_tenant_email_idx` ON `customers` (`tenantId`,`email`);--> statement-breakpoint
+CREATE INDEX `deliveries_tenant_status_idx` ON `deliveries` (`tenantId`,`status`);--> statement-breakpoint
+CREATE INDEX `domain_events_tenant_occurred_at_idx` ON `domainEvents` (`tenantId`,`occurredAt`);--> statement-breakpoint
+CREATE INDEX `funnel_events_tenant_event_idx` ON `funnelEvents` (`tenantId`,`eventName`,`occurredAt`);--> statement-breakpoint
+CREATE INDEX `idempotency_keys_tenant_scope_idx` ON `idempotencyKeys` (`tenantId`,`scope`);--> statement-breakpoint
+CREATE INDEX `inventory_movements_tenant_created_at_idx` ON `inventoryMovements` (`tenantId`,`createdAt`);--> statement-breakpoint
+CREATE INDEX `order_items_tenant_order_idx` ON `orderItems` (`tenantId`,`orderId`);--> statement-breakpoint
+CREATE INDEX `orders_tenant_created_at_idx` ON `orders` (`tenantId`,`createdAt`);--> statement-breakpoint
+CREATE INDEX `outbox_events_tenant_pending_idx` ON `outboxEvents` (`tenantId`,`status`,`availableAt`);--> statement-breakpoint
+CREATE INDEX `payments_tenant_status_idx` ON `payments` (`tenantId`,`status`);--> statement-breakpoint
+CREATE INDEX `products_tenant_status_idx` ON `products` (`tenantId`,`status`);--> statement-breakpoint
+CREATE INDEX `sales_tenant_status_created_at_idx` ON `sales` (`tenantId`,`status`,`createdAt`);
